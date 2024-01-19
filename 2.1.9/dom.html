@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Функция для рисования домика
+    function drawHouse() {
+        ctx.fillStyle = "brown";
+        ctx.fillRect(150, 200, 100, 100);
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(175, 250, 50, 50);
+
+        ctx.beginPath();
+        ctx.moveTo(150, 200);
+        ctx.lineTo(250, 200);
+        ctx.lineTo(200, 150);
+        ctx.closePath();
+        ctx.fillStyle = "brown";
+        ctx.fill();
+    }
+
+    // Функция для рисования дерева
+    function drawTree() {
+        ctx.fillStyle = "brown";
+        ctx.fillRect(300, 150, 50, 150);
+
+        ctx.beginPath();
+        ctx.arc(325, 100, 75, 0, 2 * Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+    }
+
+    // Функция для рисования солнца и луны
+    function drawSunOrMoon() {
+        var currentTime = new Date().getTime();
+        var isSun = Math.floor(currentTime / 10000) % 2 === 0;
+
+        ctx.beginPath();
+        ctx.arc(50, 50, 25, 0, 2 * Math.PI);
+        ctx.fillStyle = isSun ? "yellow" : "gray";
+        ctx.fill();
+   }
+
+    // Функция для очистки холста
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function drawScene() {
+        clearCanvas();
+
+        drawHouse();
+        drawTree();
+        drawSunOrMoon();
+    }
+
+    setInterval(drawScene, 100); // Перерисовка сцены каждые 100 миллисекунд (10 раз в секунду)
+</script>
+</body>
+</html>
